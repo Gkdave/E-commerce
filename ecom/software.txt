@@ -1,0 +1,5 @@
+create virtualenv d_env
+create project ecom
+pip install django 
+create home app 
+create templates and conf is setting.py
