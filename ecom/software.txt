@@ -3,3 +3,7 @@ create project ecom
 pip install django 
 create home app 
 create templates and conf is setting.py
+create models in base and import in product.models 
+pip install pillow
+create app accounts 
+
