@@ -6,4 +6,7 @@ create templates and conf is setting.py
 create models in base and import in product.models 
 pip install pillow
 create app accounts 
+create profile models 
+base.html 
+add css in setting.py
 
