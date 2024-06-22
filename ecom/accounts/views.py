@@ -16,7 +16,7 @@ def login_page(request):
             messages.warning(request,'Account not found!')
             return HttpResponseRedirect(request.path_info)
         
-        if not user_obj[0].profile.is_email_verified:
+        if not user_obj[1].profile.is_email_verified:
             messages.warning(request,'Your Account is not verified.')
             return HttpResponseRedirect(request.path_info)
         
@@ -24,12 +24,12 @@ def login_page(request):
         print(email)
         if user_obj:
             login(request,user_obj)
-            return redirect("/accounts/register/")
+            return redirect("/")
         
         messages.warning(request,'Invalid Credentials')
         return HttpResponseRedirect(request.path_info)
-        
-    return render(request,'/')
+    return render(request,'accounts/login.html')
+
 
 
 def register_page(request):
@@ -51,5 +51,13 @@ def register_page(request):
         return HttpResponseRedirect(request.path_info)
     return render(request,'accounts/register.html')
 
+def activate_email(request, email_token):
+    try:
+        user = Profile.objects.get(email_token= email_token)
+        user.is_email_verified = True
+        user.save()
+        return redirect("/")
+    except Exception as e:
+        return HttpResponse("Invalid Email token")
 
 
