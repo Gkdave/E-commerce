@@ -11,7 +11,11 @@ class Category(BaseModel):
 
     def save(self,*args ,**kwargs):
         self.slug = slugify(self.category_name)
-        super(Category,self).save() 
+        super(Category,self).save(*args, **kwargs)
+
+
+    def __str__(self):
+        return self.category_name
 
 class Product(BaseModel):
     product_name = models.CharField(max_length=100)
@@ -21,6 +25,14 @@ class Product(BaseModel):
     product_description = models.TextField()
     #color_variant = models.ManyToManyField(color_variant,blank=True)
     #size_variant = models.ManyToManyField(SizeVariant,black=True)
+
+    def save(self,*args ,**kwargs):
+        self.slug = slugify(self.product_name )
+        super(Product,self).save(*args, **kwargs)
+
+
+    def __str__(self):
+        return self.product_name 
 
 
 
