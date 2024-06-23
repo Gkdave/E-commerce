@@ -16,9 +16,9 @@ def login_page(request):
             messages.warning(request,'Account not found!')
             return HttpResponseRedirect(request.path_info)
         
-        if not user_obj[1].profile.is_email_verified:
-            messages.warning(request,'Your Account is not verified.')
-            return HttpResponseRedirect(request.path_info)
+        # if not user_obj[0].profile.is_email_verified:
+        #     messages.warning(request,'Your Account is not verified.')
+        #     return HttpResponseRedirect(request.path_info)
         
         user_obj = authenticate(username=email,password=password)
         print(email)
@@ -43,7 +43,7 @@ def register_page(request):
         if user_obj .exists():
             messages.warning(request,"Email is already taken !")
             return HttpResponseRedirect(request.path_info)
-        #print(email)
+        print(email)
         user_obj = User.objects.create(first_name=first_name,last_name=last_name,email=email,username=email,password=password)
         user_obj.set_password(password)
         user_obj.save()
