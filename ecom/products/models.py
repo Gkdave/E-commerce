@@ -47,9 +47,13 @@ class Product(BaseModel):
 
     def __str__(self):
         return self.product_name 
+    
+    def get_product_price_by_size(self,size):
+        return self.price + SizeVariant.objects.get(size_name = size).price
 
 
 
 class ProductImage(BaseModel):
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='product_images') 
     image = models.ImageField(upload_to="product")
+
